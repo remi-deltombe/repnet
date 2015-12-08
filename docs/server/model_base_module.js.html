@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: model/base/module.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: model/base/module.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var Tools = require('./../../helper/tools.js');
+var Map = require('./../../collection/map.js');
+var Emitter = require('./../../event/emitter.js');
+
+/**
+ * Init a module
+ * @class  Module Modulable part base class
+ * @memberOf RepNet.Model.Base
+ * @extends RepNet.Event.Emitter
+ * @constructor
+ * @param {String|Number} id Module's index
+ * @param {Modulable} parent Module's parent
+ */
+var Module = function Module(id, parent)
+{
+	/**
+	 * Unique module index
+	 * @type {String|Number}
+	 */
+	this.id = id;
+
+	/**
+	 * Module's UUID
+	 * @type {String}
+	 */
+	this.uuid = Tools.generateUUID();
+
+	/**
+	 * Module's parent
+	 * @type {Modulable}
+	 */
+	this.parent = parent;
+
+	/**
+	 * Linked module's module
+	 * @type {Map}
+	 */
+	this.linkChilds = new Map();
+
+	/**
+	 * Parent's module module
+	 * @type {Module}
+	 */
+	this.linkParent = null;
+
+	Emitter.call(this);
+
+};
+
+// Extend Emitter
+Tools.extend(Module, Emitter);
+
+/**
+ * Link a module to the module
+ * @lends Module
+ * @param  {Module} module Module to link
+ * @param  {Boolean} fromRecursion Is the function call recursiveliy
+ * @return {void}
+ */
+Module.prototype.link = function (module, fromRecursion)
+{
+	if (!this.linkChilds.exist(module.uuid)) {
+		if (!fromRecursion) {
+			module.linkTo(this, true);
+		}
+		this.linkChilds.set(module.uuid, module);
+		this.trigger('link', module);
+	}
+};
+
+/**
+ * Unlink a module from the module
+ * @lends Module
+ * @param  {Module} module module to unlink
+ * @param  {Boolean} fromRecursion Is the function call recursiveliy
+ * @return {void}
+ */
+Module.prototype.unlink = function (module, fromRecursion)
+{
+	if (this.linkChilds.exist(module.uuid)) {
+		if (!fromRecursion) {
+			module.unlinkTo(true);
+		}
+
+		this.linkChilds.remove(module.uuid);
+		this.trigger('unlink', module);
+	}
+};
+
+/**
+ * Define the module's parent module
+ * @lends Module
+ * @param  {Module} module Module to link
+ * @param  {Boolean} fromRecursion Is the function call recursiveliy
+ * @return {void}
+ */
+Module.prototype.linkTo = function (module, fromRecursion)
+{
+	if (this.linkParent) {
+		if (this.linkParent.uuid != module.uuid) {
+			this.unlinkTo();
+		} else {
+			return;
+		}
+	}
+
+	if (!fromRecursion) {
+		module.link(this, true);
+	}
+
+	this.linkParent = module;
+	this.trigger('linkTo', module);
+};
+
+/**
+ * Unlink module from parent
+ * @lends Module
+ * @param  {Boolean} fromRecursion Is the function call recursiveliy
+ * @return {void}
+ */
+Module.prototype.unlinkTo = function (fromRecursion)
+{
+	var parent;
+
+	if (!fromRecursion) {
+		this.linkParent.unlink(this, true);
+	}
+
+	parent = this.linkParent;
+	this.linkParent = null;
+	this.trigger('unlinkTo', parent);
+};
+
+/**
+ * Encode instance for json result
+ * @lends Module
+ * @return {Object} Instance encoded
+ */
+Module.prototype.toJSON = function()
+{
+	var result = {
+		id : this.id,
+		uuid : this.uuid,
+		parent : this.parent.id, 
+		childs : []
+	};
+	this.linkChilds.each(function(index, instance){
+		result.childs.push(instance.toJSON());
+	});
+
+	return result;
+};
+
+module.exports = Module;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="RepNet.Collection.List.html">List</a></li><li><a href="RepNet.Collection.Map.html">Map</a></li><li><a href="RepNet.Controller.HTTP.html">HTTP</a></li><li><a href="RepNet.Controller.Socket.html">Socket</a></li><li><a href="RepNet.Event.Emitter.html">Emitter</a></li><li><a href="RepNet.Helper.Config.html">Config</a></li><li><a href="RepNet.Helper.Tools.html">Tools</a></li><li><a href="RepNet.Model.Base.Factory.html">Factory</a></li><li><a href="RepNet.Model.Base.Modulable.html">Modulable</a></li><li><a href="RepNet.Model.Base.Module.html">Module</a></li><li><a href="RepNet.Model.Node.Node.html">Node</a></li><li><a href="RepNet.Model.Node.NodeFactory.html">NodeFactory</a></li><li><a href="RepNet.Model.Node.NodeModule.html">NodeModule</a></li><li><a href="RepNet.Model.Reflector.Reflector.html">Reflector</a></li><li><a href="RepNet.Model.Reflector.ReflectorFactory.html">ReflectorFactory</a></li><li><a href="RepNet.Model.Reflector.ReflectorModule.html">ReflectorModule</a></li><li><a href="RepNet.Model.Station.Station.html">Station</a></li><li><a href="RepNet.Model.Station.StationFactory.html">StationFactory</a></li><li><a href="RepNet.RepNet.html">RepNet</a></li></ul><h3>Namespaces</h3><ul><li><a href="RepNet.html">RepNet</a></li><li><a href="RepNet.Collection.html">Collection</a></li><li><a href="RepNet.Controller.html">Controller</a></li><li><a href="RepNet.Event.html">Event</a></li><li><a href="RepNet.Helper.html">Helper</a></li><li><a href="RepNet.Model.html">Model</a></li><li><a href="RepNet.Model.Base.html">Base</a></li><li><a href="RepNet.Model.Node.html">Node</a></li><li><a href="RepNet.Model.Reflector.html">Reflector</a></li><li><a href="RepNet.Model.Station.html">Station</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Dec 08 2015 19:01:52 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

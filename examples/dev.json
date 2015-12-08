@@ -1,0 +1,24 @@
+[
+	{
+		"reflector" : "REFLECTOR",
+		"modules" : [ "A", "B", "C" ],
+		"nodes" : [
+			{
+				"callsign": "NODE",
+				"module": "A",
+				"linkedto": "A",
+				"time": "Tuesday Tue Nov 24 18:57:16 2015"
+			}
+		],
+		"stations" : [
+			{
+				"callsign": "STATION",
+				"node": "NODE",
+				"module": "A",
+				"time": "Tuesday Tue Nov 24 18:57:16 2015"
+			}
+		],
+		"onair": "STATION",
+		"offair": "STATION"
+	}
+]

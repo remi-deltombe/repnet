@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: collection/list.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: collection/list.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Init the list
+ * @class List collection implementation
+ * @memberof RepNet.Collection
+ * @constructor
+ * @param {*} dataType Type of data who can be contain in list
+ */
+var List = function List(dataType)
+{
+	/**
+	 * List data
+	 * @type {Object}
+	 */
+	this.datas = [];
+
+	/**
+	 * Number of data in list
+	 * @type {Number}
+	 */
+	this.length = 0;
+
+	/**
+	 * Type of data who can be contain
+	 * @type {Object}
+	 */
+	this.dataType = dataType || null;
+};
+
+List.prototype =
+/** @lends List */
+{
+	/**
+	 * Add data at the end of the list
+	 * @param {*} data Data to add
+	 * @return {Number} Data's index in the list
+	 */
+	add : function(data)
+	{
+		if ((this.dataType === null) || (data instanceof this.dataType)) {
+			this.datas.push(data);
+			return this.length - 1;
+		} else {
+			throw Error('data is not a valid instance');
+		}
+	},
+
+	/**
+	 * Test if an index used by the list
+	 * @param  {Number} id Index to test
+	 * @return {Boolean} Test'result
+	 */
+	exist : function (id)
+	{
+		return typeof this.datas[id] != 'undefined';
+	},
+
+	/**
+	 * Set the data in the list
+	 * @param {Number} id Index to set
+	 * @param {*} data Data used to set
+	 * @return {void}
+	 */
+	set : function (id, data)
+	{
+		if (data === undefined) {
+			throw 'data is not define';
+		}
+
+		if (!this.exist(id)) {
+			throw 'data at index '+id+' doesn\'t exist';
+		}
+
+		if ((this.dataType === null) || (data instanceof this.dataType)) {
+			this.datas[id] = data;
+		} else {
+			throw Error('data is not a valid instance');
+		}
+	},
+
+	/**
+	 * Return data from the list
+	 * @param {Number} id Index to get
+	 * @return {*} Data at the index
+	 */
+	get : function (id)
+	{
+		if (!this.exist(id)) {
+			throw Error('data at index '+id+' doesn\'t exist');
+		}
+		return this.datas[id];
+	},
+
+	/**
+	 * Remove data from the list
+	 * @param  {Number} id Index to remove
+	 * @return {void}
+	 */
+	remove : function (id)
+	{
+		if (!this.exist(id)) {
+			throw Error('data at index '+id+' doesn\'t exist');
+		}
+		this.datas.splice(id,1);
+		this.length--;
+	},
+
+	/**
+	 * Call in "each" function with every data
+	 * @callback List~onEach
+	 * @param {Number} id Data's index in the list
+	 * @param {*} data Data at the current index
+	 * @return {Boolean} should List continue "each" loop
+	 */
+	/**
+	 * Apply callback on each list data 
+	 * Callback is call in the data context
+	 * @param  {List~onEach} callback callback applied
+	 * @return {Boolean} was the calling queue cut 
+	 */
+	each : function (callback)
+	{
+		var i;
+		for( i=0; i&lt;this.datas.length; i++){
+			if (callback(i, this.datas[i]) === false) {
+				return false;
+			}
+		}
+		return true;
+	}
+};
+
+module.exports = List;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="RepNet.Collection.List.html">List</a></li><li><a href="RepNet.Collection.Map.html">Map</a></li><li><a href="RepNet.Controller.HTTP.html">HTTP</a></li><li><a href="RepNet.Controller.Socket.html">Socket</a></li><li><a href="RepNet.Event.Emitter.html">Emitter</a></li><li><a href="RepNet.Helper.Config.html">Config</a></li><li><a href="RepNet.Helper.Tools.html">Tools</a></li><li><a href="RepNet.Model.Base.Factory.html">Factory</a></li><li><a href="RepNet.Model.Base.Modulable.html">Modulable</a></li><li><a href="RepNet.Model.Base.Module.html">Module</a></li><li><a href="RepNet.Model.Node.Node.html">Node</a></li><li><a href="RepNet.Model.Node.NodeFactory.html">NodeFactory</a></li><li><a href="RepNet.Model.Node.NodeModule.html">NodeModule</a></li><li><a href="RepNet.Model.Reflector.Reflector.html">Reflector</a></li><li><a href="RepNet.Model.Reflector.ReflectorFactory.html">ReflectorFactory</a></li><li><a href="RepNet.Model.Reflector.ReflectorModule.html">ReflectorModule</a></li><li><a href="RepNet.Model.Station.Station.html">Station</a></li><li><a href="RepNet.Model.Station.StationFactory.html">StationFactory</a></li><li><a href="RepNet.RepNet.html">RepNet</a></li></ul><h3>Namespaces</h3><ul><li><a href="RepNet.html">RepNet</a></li><li><a href="RepNet.Collection.html">Collection</a></li><li><a href="RepNet.Controller.html">Controller</a></li><li><a href="RepNet.Event.html">Event</a></li><li><a href="RepNet.Helper.html">Helper</a></li><li><a href="RepNet.Model.html">Model</a></li><li><a href="RepNet.Model.Base.html">Base</a></li><li><a href="RepNet.Model.Node.html">Node</a></li><li><a href="RepNet.Model.Reflector.html">Reflector</a></li><li><a href="RepNet.Model.Station.html">Station</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Dec 08 2015 19:01:52 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

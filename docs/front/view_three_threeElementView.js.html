@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: view/three/threeElementView.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: view/three/threeElementView.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @class ThreeELementView Three js view base class
+ * @memberOf RepNet.View.Three
+ * @interface
+ * @constructor
+ * @param {DOMElement} dom Dom where to display view
+ */
+var ThreeElementView = function ThreeElementView(dom)
+{
+	View.call(this, dom);
+
+	/**
+	 * Element's UUID
+	 * @type {String}
+	 */
+	this.uuid = Tools.generateUUID();
+
+	/**
+	 * Main elemen'ts graphic component's container
+	 * @type {THREE.Group}
+	 */
+	this.threeElement = new THREE.Group();
+
+	/**
+	 * Main elemen'ts graphic component's container
+	 * @type {DOM}
+	 */
+	this.domElement = document.createElement('div');
+
+	/**
+	 * Child's container
+	 * @type {THREE.Group}
+	 */
+	this.threeChilds = new THREE.Group();
+
+	/**
+	 * Child's container
+	 * @type {DOM}
+	 */
+	this.domChilds = document.createElement('div');
+
+	/**
+	 * Element parent
+	 * @type {ThreeElementView}
+	 */
+	this.parent = null;
+
+	/**
+	 * Childs list
+	 * @type {Map}
+	 */
+	this.childs = new Map();
+
+	// build element content
+	this.threeElement.add(this.threeChilds);
+	this.domElement.appendChild(this.domChilds);
+	
+	this.buildContent();
+}
+
+// Extend view
+Tools.extend(ThreeElementView, View);
+
+ThreeElementView.prototype = 
+/** @lends  ThreeElementView */
+{
+	/**
+	 * Build graphic's element of the instance
+ 	* @return {void}
+	 */
+	buildContent : function()
+	{
+	},
+
+	/**
+	 * Append a ThreeElementView as child of the current one
+	 * @param  {ThreeElementView} child Child to append
+	 * @param {Boolean} fromRecursive Is function call recursivly?
+	 * @return {void}
+	 */
+	append : function(child, fromRecursive)
+	{
+		if (!this.childs.exist(child.uuid)) {
+			if (!fromRecursive) {
+				child.appendTo(this, true);
+			}			
+			this.childs.set(child.uuid, child);
+		}
+	},
+
+	/**
+	 * Remove a child of
+	 * @param  {ThreeElementView} child Child to remove
+	 * @param {Boolean} fromRecursive Is function call recursivly?
+	 * @return {void}
+	 */
+	unappend : function(child, fromRecursive)
+	{
+		if (this.childs.exist(child.uuid)) {
+			if (!fromRecursive) {
+				child.unappendTo(true);
+			}
+			this.childs.remove(child.uuid);
+		}
+	},
+
+	/**
+	 * Define the parent of the ThreeElementView
+	 * @param  {ThreeElementView} child Child to append
+	 * @param {Boolean} fromRecursive Is function call recursivly?
+	 * @return {void}
+	 */
+	appendTo : function(parent, fromRecursive)
+	{
+		if (this.parent) {
+			if (this.parent.uuid == parent.uuid) {
+				return;
+			}
+			this.unappendTo();
+		}
+
+		if (!fromRecursive) {
+			parent.append(this, true);
+		}
+
+		this.parent = parent;
+	},
+
+	/**
+	 * Remove the ThreeElementView from the parent
+	 * @param {Boolean} fromRecursive Is function call recursivly?
+	 * @return {void}
+	 */
+	unappendTo : function(fromRecursive)
+	{
+		if (this.parent) {
+			if (!fromRecursive) {
+				this.parent.unappend(this, true);
+			}
+			this.parent = null;
+		}
+	},
+
+	/**
+	 * Set the element as visible
+	 * @return {void}
+	 */
+	show : function()
+	{
+		this.parent.threeChilds.add(this.threeElement);
+		this.parent.domChilds.appendChild(this.domElement);
+	},
+
+	/**
+	 * Set the element as visible
+	 * @return {void}
+	 */
+	hide : function()
+	{
+		this.parent.threeChilds.remove(this.threeElement);
+		this.parent.domChilds.removeChild(this.domElement);
+	},
+
+	/**
+	 * Update view
+	 * @return {void}
+	 */
+	update : function()
+	{
+		this.childs.each(function(index, child){
+			child.update();
+		});
+	},
+
+	/**
+	 * Set position of the element
+	 * @param {Number|false} x X axis, let the current value if false 
+	 * @param {Number|false} y Y axis, let the current value if false 
+	 * @param {Number|false} z Z axis, let the current value if false 
+	 */
+	setPosition : function(x, y, z)
+	{
+		if (typeof x != "undefined" &amp;&amp; x !== false) {
+			this.threeElement.position.x = x;
+		}
+		if (typeof y != "undefined" &amp;&amp; y !== false) {
+			this.threeElement.position.y = y;
+		}
+		if (typeof z != "undefined" &amp;&amp; z !== false) {
+			this.threeElement.position.z = z;
+		}
+	},
+
+	/**
+	 * Set rotation of the element
+	 * @param {Number|false} x X axis, let the current value if false 
+	 * @param {Number|false} y Y axis, let the current value if false 
+	 * @param {Number|false} z Z axis, let the current value if false 
+	 */
+	setRotation : function(x, y, z)
+	{
+		if (typeof x != "undefined" &amp;&amp; x !== false) {
+			this.threeElement.rotation.x = x;
+		}
+		if (typeof y != "undefined" &amp;&amp; y !== false) {
+			this.threeElement.rotation.y = y;
+		}
+		if (typeof z != "undefined" &amp;&amp; z !== false) {
+			this.threeElement.rotation.z = z;
+		}
+	}
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="RepNet.Collection.List.html">List</a></li><li><a href="RepNet.Collection.Map.html">Map</a></li><li><a href="RepNet.Controller.DebugCtrl.html">DebugCtrl</a></li><li><a href="RepNet.Controller.DStarCtrl.html">DStarCtrl</a></li><li><a href="RepNet.Controller.SocketCtrl.html">SocketCtrl</a></li><li><a href="RepNet.Event.Emitter.html">Emitter</a></li><li><a href="RepNet.Helper.Config.html">Config</a></li><li><a href="RepNet.Helper.Tools.html">Tools</a></li><li><a href="RepNet.Model.Base.Factory.html">Factory</a></li><li><a href="RepNet.Model.Base.Modulable.html">Modulable</a></li><li><a href="RepNet.Model.Base.Module.html">Module</a></li><li><a href="RepNet.Model.Base.SingletonFactory.html">SingletonFactory</a></li><li><a href="RepNet.Model.Node.Node.html">Node</a></li><li><a href="RepNet.Model.Node.NodeFactory.html">NodeFactory</a></li><li><a href="RepNet.Model.Nodee.NodeModule.html">NodeModule</a></li><li><a href="RepNet.Model.Reflector.Reflector.html">Reflector</a></li><li><a href="RepNet.Model.Reflector.ReflectorFactory.html">ReflectorFactory</a></li><li><a href="RepNet.Model.Reflectore.ReflectorModule.html">ReflectorModule</a></li><li><a href="RepNet.Model.Station.Station.html">Station</a></li><li><a href="RepNet.Model.Station.StationFactory.html">StationFactory</a></li><li><a href="RepNet.RepNet.html">RepNet</a></li><li><a href="RepNet.View.DStar.DStar3DView.html">DStar3DView</a></li><li><a href="RepNet.View.DStar.DStarView.html">DStarView</a></li><li><a href="RepNet.View.Three.DStar.DStarNetworkThreeView.html">DStarNetworkThreeView</a></li><li><a href="RepNet.View.Three.DStar.DStarNodeThreeView.html">DStarNodeThreeView</a></li><li><a href="RepNet.View.Three.DStar.DStarReflectorThreeView.html">DStarReflectorThreeView</a></li><li><a href="RepNet.View.Three.DStar.DStarStationThreeView.html">DStarStationThreeView</a></li><li><a href="RepNet.View.Three.Network.NetworkNodeThreeView.html">NetworkNodeThreeView</a></li><li><a href="RepNet.View.Three.Network.NetworkThreeView.html">NetworkThreeView</a></li><li><a href="RepNet.View.Three.ThreeElementView.html">ThreeElementView</a></li><li><a href="RepNet.View.View.html">View</a></li></ul><h3>Namespaces</h3><ul><li><a href="RepNet.html">RepNet</a></li><li><a href="RepNet.Collection.html">Collection</a></li><li><a href="RepNet.Controller.html">Controller</a></li><li><a href="RepNet.Event.html">Event</a></li><li><a href="RepNet.Helper.html">Helper</a></li><li><a href="RepNet.Model.html">Model</a></li><li><a href="RepNet.Model.Base.html">Base</a></li><li><a href="RepNet.Model.Node.html">Node</a></li><li><a href="RepNet.Model.Reflector.html">Reflector</a></li><li><a href="RepNet.Model.Station.html">Station</a></li><li><a href="RepNet.View.html">View</a></li><li><a href="RepNet.View.DStar.html">DStar</a></li><li><a href="RepNet.View.Three.html">Three</a></li><li><a href="RepNet.View.Three.DStar.html">DStar</a></li><li><a href="RepNet.View.Three.Network.html">Network</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Dec 08 2015 19:02:02 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

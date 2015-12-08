@@ -1,0 +1,37 @@
+{
+	"name": "repnet",
+	"version": "0.0.1",
+	"description": "Repnet server",
+	"author": "Rémi DELTOMBE <deltombe.remi@gmail.com>",
+	"contributors": [{
+		"name": "Jean-Luc DELTOMBE",
+		"email": "jean-luc.deltombe@alt.lu"
+	},{
+		"name": "Luc ENGELMANN",
+		"email": "luc.engelmann@epf.lu"
+	}],
+	"scripts": {
+		"start": "node server.js"
+	},
+	"main": "src/repnet.js",
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"bugs": {
+		"url": ""
+	},
+	"keywords": [
+		"DStar",
+		"ON8JL",
+		"BabyStar",
+		"DadyStar"
+	],
+	"dependencies": {
+		"socket.io": "1.3.*",
+		"express": "4.13.x",
+		"jade": "*"
+	},
+	"analyze": true,
+	"license": "GPL"
+}
