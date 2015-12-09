@@ -5,12 +5,27 @@
  */
 var DStarCtrl = function DStarCtrl()
 {
-	var that = this;
+	var dom,that = this;
+
+	// ---
+	// View
 
 	this.views = new Map();
 
-	// add views 
-	this.views.set('3D', new DStar3DView(document.getElementById('galaxy')));
+	// 3D
+	dom = document.getElementById('galaxy');
+	this.views.set('3D', new DStar3DView(dom));
+
+	// menu
+	dom = document.getElementById('menu-left-top');
+	this.menu = new MenuView(dom);
+	this.menu.add(new MenuItemView(dom, 'search', 'Search'));
+	this.menu.add(new MenuItemView(dom, 'reflector', 'Reflectors'));
+	this.menu.add(new MenuItemView(dom, 'node', 'Nodes'));
+	this.menu.add(new MenuItemView(dom, 'station', 'Stations'));
+
+	// ---
+	// Events
 
 	// register models events
 	// Reflector

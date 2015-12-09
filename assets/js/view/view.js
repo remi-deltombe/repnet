@@ -19,22 +19,20 @@ var View = function View(dom)
 // extend Emitter
 Tools.extend(View, Emitter);
 
-View.prototype = 
+/**
+ * Show the view
+ * @return {void}
+ */
+View.prototype.show = function()
 /** @lends  View */
 {
-	/**
-	 * Show the view
-	 * @return {void}
-	 */
-	show : function()
-	{
-	}, 
+};
 
-	/**
-	 * Hide the view
-	 * @return {void}
-	 */
-	hide : function()
-	{
-	},
+/**
+ * Hide the view
+ * @return {void}
+ */
+View.prototype.hide = function()
+/** @lends  View */
+{
 };

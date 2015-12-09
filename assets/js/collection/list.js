@@ -38,7 +38,7 @@ List.prototype =
 	{
 		if ((this.dataType === null) || (data instanceof this.dataType)) {
 			this.datas.push(data);
-			return this.length - 1;
+			return this.datas.length - 1;
 		} else {
 			throw Error('data is not a valid instance');
 		}
@@ -101,7 +101,6 @@ List.prototype =
 			throw Error('data at index '+id+' doesn\'t exist');
 		}
 		this.datas.splice(id,1);
-		this.length--;
 	},
 
 	/**

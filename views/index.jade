@@ -2,63 +2,73 @@ html
   head
     title!= "RepNet"
     link(rel="stylesheet", href="assets/css/style.css")
+    link(rel="stylesheet", href="assets/css/icons.css")
+    link(href="https://fonts.googleapis.com/css?family=Titillium+Web:400,700,200", rel="stylesheet", type="text/css")
   body
-        // 3D View
-        div#galaxy
+    // Left menu
+    div#menu-left
+        #menu-left-top
+        #menu-left-bottom
+            
+    // 3D View
+    div#galaxy
 
-        // ---------
-        // JS Import
+    // ---------
+    // JS Import
 
-        // Helpers
-        script(src="assets/js/helper/tools.js")
-        script(src="assets/js/helper/config.js")
+    // Helpers
+    script(src="assets/js/helper/tools.js")
+    script(src="assets/js/helper/config.js")
 
-        // Collections
-        script(src="assets/js/collection/list.js")
-        script(src="assets/js/collection/map.js")
+    // Collections
+    script(src="assets/js/collection/list.js")
+    script(src="assets/js/collection/map.js")
 
-        // Events
-        script(src="assets/js/event/emitter.js")
+    // Events
+    script(src="assets/js/event/emitter.js")
 
-        // Models
-        script(src="assets/js/model/base/factory.js")
-        script(src="assets/js/model/base/singletonFactory.js")
-        script(src="assets/js/model/base/module.js")
-        script(src="assets/js/model/base/modulable.js")
+    // Models
+    script(src="assets/js/model/base/factory.js")
+    script(src="assets/js/model/base/singletonFactory.js")
+    script(src="assets/js/model/base/module.js")
+    script(src="assets/js/model/base/modulable.js")
 
-        script(src="assets/js/model/station/factory.js")
-        script(src="assets/js/model/station/station.js")
+    script(src="assets/js/model/station/factory.js")
+    script(src="assets/js/model/station/station.js")
 
-        script(src="assets/js/model/node/factory.js")
-        script(src="assets/js/model/node/module.js")
-        script(src="assets/js/model/node/node.js")
+    script(src="assets/js/model/node/factory.js")
+    script(src="assets/js/model/node/module.js")
+    script(src="assets/js/model/node/node.js")
 
-        script(src="assets/js/model/reflector/factory.js")
-        script(src="assets/js/model/reflector/module.js")
-        script(src="assets/js/model/reflector/reflector.js")
+    script(src="assets/js/model/reflector/factory.js")
+    script(src="assets/js/model/reflector/module.js")
+    script(src="assets/js/model/reflector/reflector.js")
 
-        // View
-        script(src="assets/js/view/view.js")
+    // View
+    script(src="assets/js/view/view.js")
 
-        script(src="assets/js/view/three/threeElementView.js")
-        script(src="assets/js/view/three/network/networkThreeView.js")
-        script(src="assets/js/view/three/network/networkNodeThreeView.js")
-        script(src="assets/js/view/three/dstar/dstarNetworkThreeView.js")
-        script(src="assets/js/view/three/dstar/dstarReflectorThreeView.js")
-        script(src="assets/js/view/three/dstar/dstarNodeThreeView.js")
-        script(src="assets/js/view/three/dstar/dstarStationThreeView.js")
+    script(src="assets/js/view/three/threeElementView.js")
+    script(src="assets/js/view/three/network/networkThreeView.js")
+    script(src="assets/js/view/three/network/networkNodeThreeView.js")
+    script(src="assets/js/view/three/dstar/dstarNetworkThreeView.js")
+    script(src="assets/js/view/three/dstar/dstarReflectorThreeView.js")
+    script(src="assets/js/view/three/dstar/dstarNodeThreeView.js")
+    script(src="assets/js/view/three/dstar/dstarStationThreeView.js")
 
-        script(src="assets/js/view/dstar/dstarView.js")
-        script(src="assets/js/view/dstar/dstar3DView.js")
+    script(src="assets/js/view/dstar/dstarView.js")
+    script(src="assets/js/view/dstar/dstar3DView.js")
 
-        // Controllers
-        script(src="assets/js/controller/debugCtrl.js")
-        script(src="assets/js/controller/socketCtrl.js")
-        script(src="assets/js/controller/DStarCtrl.js")
+    script(src="assets/js/view/menu/menuView.js")
+    script(src="assets/js/view/menu/menuItemView.js")
 
-        // App
-        script(src="assets/js/repnet.js")
-        
-        // Libraries
-        script(src="socket.io/socket.io.js")
-        script(src="assets/vendors/three/three.js")
+    // Controllers
+    script(src="assets/js/controller/debugCtrl.js")
+    script(src="assets/js/controller/socketCtrl.js")
+    script(src="assets/js/controller/dstarCtrl.js")
+
+    // App
+    script(src="assets/js/repnet.js")
+    
+    // Libraries
+    script(src="socket.io/socket.io.js")
+    script(src="assets/vendors/three/three.js")

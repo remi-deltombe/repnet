@@ -90,6 +90,12 @@
  * @memberOf RepNet.View.Three
  */
 
+/**
+ * Menu view
+ * @namespace Menu
+ * @memberOf RepNet.View
+ */
+
 // ------------------------
 // 
 /**
