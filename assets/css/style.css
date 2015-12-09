@@ -17,6 +17,12 @@
 	box-sizing:border-box;
 }
 
+html,body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
 body {
 	background: #000;
 	color: #fff;
@@ -83,7 +89,7 @@ a {
 		#menu-left .item.active .icon:before,
 		#menu-left .item:hover .icon:before
 		{ transform:rotate(90deg);}
-		
+
 		#menu-left .reflector.active .icon:before,
 		#menu-left .reflector:hover .icon:before
 		{ transform:rotate(180deg);}
