@@ -50,13 +50,6 @@ var NetworkThreeView = function(dom)
 	this.renderer.setSize( this.dom.offsetWidth, this.dom.offsetHeight );
 	this.dom.appendChild( this.renderer.domElement );
 
-	// configure dom container
-	this.dom.style.position= 'absolute';
-	this.dom.style.top= 0;
-	this.dom.style.right= 0;
-	this.dom.style.bottom= 0;
-	this.dom.style.left= 0;
-
 	this.dom.appendChild(this.domElement);
 	this.scene.add(this.threeElement);
 };
