@@ -45,6 +45,8 @@ Node.prototype.populate = function (data)
 	this.id = data.reflector || this.id;
 	this.id = this.id.trim();
 
+	this.trigger('populate', this);
+	
 	// nodes linked
 	for (j=0; j<data.modules.length; j++) {
 		nm = data.modules[j];
