@@ -26,6 +26,6 @@ DStarNodeThreeView.prototype.append = function(child, fromRecursive)
 	NetworkNodeThreeView.prototype.append.call(this, child, fromRecursive);
 
 	child.setDistance(Tools.minmax(.5,.7));
-	child.setSpeed(Tools.minmax(.02,.03));
+	child.setSpeed(Tools.minmax(.002,.003));
 	child.setOrbit(Tools.minmax(-1,1), Tools.minmax(-1,1));
 };
