@@ -15,6 +15,11 @@ html
     div#menu-left
         #menu-left-top
         #menu-left-bottom
+
+    // Left panels
+    #panel-reflectors.panel
+    #panel-nodes.panel
+    #panel-stations.panel
             
     // 3D View
     div#galaxy
@@ -43,6 +48,9 @@ html
     // Events
     script(src="assets/js/event/emitter.js")
 
+    // Input
+    script(src="assets/js/input/mouse.js")
+
     // Models
     script(src="assets/js/model/base/factory.js")
     script(src="assets/js/model/base/singletonFactory.js")
@@ -63,6 +71,11 @@ html
     // View
     script(src="assets/js/view/view.js")
 
+    script(src="assets/js/view/menu/menuView.js")
+    script(src="assets/js/view/menu/menuItemView.js")
+
+    script(src="assets/js/view/panel/panelView.js")
+
     script(src="assets/js/view/three/threeElementView.js")
     script(src="assets/js/view/three/network/networkThreeView.js")
     script(src="assets/js/view/three/network/networkNodeThreeView.js")
@@ -73,9 +86,9 @@ html
 
     script(src="assets/js/view/dstar/dstarView.js")
     script(src="assets/js/view/dstar/dstar3DView.js")
-
-    script(src="assets/js/view/menu/menuView.js")
-    script(src="assets/js/view/menu/menuItemView.js")
+    script(src="assets/js/view/dstar/panel/panelReflectorsView.js")
+    script(src="assets/js/view/dstar/panel/panelNodesView.js")
+    script(src="assets/js/view/dstar/panel/panelStationsView.js")
 
     // Controllers
     script(src="assets/js/controller/debugCtrl.js")

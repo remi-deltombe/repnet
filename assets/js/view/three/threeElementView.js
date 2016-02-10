@@ -190,6 +190,14 @@ ThreeElementView.prototype =
 			this.threeElement.position.z = z;
 		}
 	},
+	
+	/**
+	 * Get position of the element
+	 */
+	getPosition : function()
+	{
+		return this.threeElement.position;
+	},
 
 	/**
 	 * Set rotation of the element
@@ -208,5 +216,13 @@ ThreeElementView.prototype =
 		if (typeof z != "undefined" && z !== false) {
 			this.threeElement.rotation.z = z;
 		}
+	},
+
+	/**
+	 * Get rotation of the element
+	 */
+	getRotation : function()
+	{
+		return this.threeElement.rotation;
 	}
 };

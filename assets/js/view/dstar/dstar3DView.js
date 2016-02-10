@@ -9,11 +9,14 @@ var DStar3DView = function DStar3DView(dom)
 {
 	View.call(this, dom);
 
+	var mouse;
+
 	this.renderer = new DStarNetworkThreeView(dom);
 	this.reflectors = new Map();
 	this.nodes = new Map();
 	this.stations = new Map();
 
+	// init renderer
 	this.renderer.setPosition(false,false,-10);
 	this.renderer.update();
 
@@ -22,6 +25,31 @@ var DStar3DView = function DStar3DView(dom)
 	Config.instance().set('3D.colors.node', 0x086CA2);
 	Config.instance().set('3D.colors.station', 0x999999);
 	Config.instance().set('3D.colors.talk', 0xFF3333);
+
+	// init mouse event
+	mouse = new Mouse();
+	mouse.on('mouseDown', function(){
+		this.initialRotation = {
+			x: this.renderer.getRotation().x,
+			y: this.renderer.getRotation().y
+		}
+	}.bind(this));
+
+	// 3D rotation follow mouse
+	mouse.on('mouseMoveDown', function(){
+		var rotation = this.renderer.getRotation();
+		var dx, dy;
+		dx = mouse.positionOnDown.x-mouse.position.x;
+		dy = mouse.positionOnDown.y-mouse.position.y;
+		rotation.x = this.initialRotation.x + (dy)/500,
+		rotation.y = this.initialRotation.y + (dx)/500
+	}.bind(this));
+
+	// scroll zoom into 3d view
+	mouse.on('scroll', function(distance){
+		var position = this.renderer.getPosition();
+		position.z += distance > 0 ? 1 : -1 ;
+	}.bind(this));
 };
 
 // extend Emitter
