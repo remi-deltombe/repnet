@@ -1,5 +1,5 @@
 /**
- * @class NetworkNodeThreeView network view container
+ * @class NetworkNodeThreeView network node in network view container
  * @memberOf RepNet.View.Three.Network
  * @extends RepNet.View.Three.ThreeElementView
  * @constructor
