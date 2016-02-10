@@ -73,6 +73,12 @@
  */
 
 /**
+ * Panel view with dstar view relation
+ * @namespace Panel
+ * @memberOf RepNet.View.DStar
+ */
+
+/**
  * 3D View layout
  * @namespace Three
  * @memberOf RepNet.View
@@ -95,6 +101,13 @@
  * @namespace Menu
  * @memberOf RepNet.View
  */
+
+/**
+ * Panel view
+ * @namespace Panel
+ * @memberOf RepNet.View
+ */
+
 
 // ------------------------
 // 
@@ -131,4 +144,5 @@ var RepNet = function RepNet(url)
 window.onload = function()
 {
     var repnet = new RepNet('');
+    new Mouse();
 };

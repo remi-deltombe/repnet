@@ -47,7 +47,7 @@ a {
 /* Menu left */
 #menu-left {
 	position: absolute;
-	z-index: 1;
+	z-index: 10;
 
 	left: 0;
 	top: 0;
@@ -136,6 +136,35 @@ a {
 	position: absolute;
 	bottom: 0;
 }
+
+/* Panels */
+.panel {
+	position: absolute;
+	z-index: 1;
+	left: 36px;
+	top: 0;
+	bottom: 0;
+	padding: 20px;
+	min-width: 300px;
+	background: #222;
+	color: #000;
+	transform: translateX(-100%);
+	transition: .25s;
+}
+
+.panel.active {
+	transform: translateX(0%);
+}
+
+#panel-reflectors { background:#f15a24; }
+#panel-nodes { background:#24b0f1; }
+#panel-stations { background:#88d832; }
+
+	.panel-title {
+		text-transform: uppercase;
+		font-size: 250%;
+		margin-bottom: 20px;
+	}
 
 /* 3D View */
 #galaxy {
