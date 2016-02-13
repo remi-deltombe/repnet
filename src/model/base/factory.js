@@ -63,9 +63,9 @@ Factory.prototype.remove = function(id)
  */
 {
 	var instance = this.get(id);
-	trigger('remove', instance);
-	Map.prototype.remove.call(id);
+	this.trigger('remove', instance);
 	delete this.get(id);
+	Map.prototype.remove.call(this,id);
 }
 
 /**
