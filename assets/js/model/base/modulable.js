@@ -60,6 +60,16 @@ var Modulable = function Modulable(id, moduleClass)
 Tools.extend(Modulable, Emitter);
 
 /**
+ * Module factory getter
+ * @return {ModuleFactory} 
+ */
+Modulable.prototype.modules = function (id)
+/** @lends  Modulable */
+{
+	return this.moduleFactory;
+};
+
+/**
  * Build or return an existing module
  * @return {Module} object module
  */

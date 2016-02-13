@@ -21,8 +21,8 @@ var PanelListElementView = function PanelListElementView(content)
 	 */
 	this.dom = document.createElement('div');
 
-	this.buildContent();
 	this.setContent(content);
+	this.buildContent();
 };
 
 // extend View & List
@@ -35,6 +35,7 @@ Tools.extend(PanelListElementView, View);
  */
 PanelListElementView.prototype.buildContent = function()
 {
+	this.dom.className += 'panel-list-element'
 }
 
 /**

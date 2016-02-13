@@ -25,7 +25,7 @@ Tools.extend(panelNodesView, DStarView);
  */
 panelNodesView.prototype.linkNode = function(node)
 {
-	var listElement = new PanelListElementDStarView(node.parent);
+	var listElement = new PanelListElementDStarModulableView(node.parent);
 	this.append(listElement);
 };
 

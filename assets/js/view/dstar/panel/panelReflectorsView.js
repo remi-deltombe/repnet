@@ -26,7 +26,7 @@ Tools.extend(panelReflectorsView, DStarView);
  */
 panelReflectorsView.prototype.addReflector = function(reflector)
 {
-	var listElement = new PanelListElementDStarView(reflector);
+	var listElement = new PanelListElementDStarModulableView(reflector);
 	this.append(listElement);
 };
 
