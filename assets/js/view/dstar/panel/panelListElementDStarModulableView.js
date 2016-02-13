@@ -63,14 +63,12 @@ PanelListElementDStarModulableView.prototype.setModuleUnlinked = function(module
 	this.modules.get(moduleName).className = 'module'; 
 }
 
-
 /**
- * Set a module as luninked
+ * Update a module status (linked, active, unlinked,...)
 * @return {void}
  */
 PanelListElementDStarModulableView.prototype.updateModuleState = function(module)
 {
-	console.log(module);
 	if ((module.linkChilds.length) || module.linkParent) {
 		this.setModuleLinked(module.id)
 	} else {
