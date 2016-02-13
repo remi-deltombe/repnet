@@ -22,7 +22,7 @@ var Socket = function Socket(http)
 	});
 
 	reflectorFactory.on('remove', function(reflector) {
-		that.socket.emit('reflector remove', {'reflectorId': reflector.id});
+		that.socket.emit('reflector remove', {'id': reflector.id});
 	});
 
 	nodeFactory.on('create', function(node) {
