@@ -1,21 +1,21 @@
 /**
  * @class Pannel with reflectors list
  * @memberOf RepNet.View.DStar.Panel
- * @extends RepNet.View.Panel.PanelView
+ * @extends RepNet.View.Panel.List.PanelListView
  * @extends RepNet.View.Dstar.DStarView
  * @constructor
  * @param {DOMElement} dom Dom where to display pannel
  */
 var panelReflectorsView = function panelReflectorsView(dom)
 {
-	PanelView.call(this,dom);
+	PanelListView.call(this,dom);
 	DStarView.call(this,dom);
 
-	this.title.innerHTML = 'Reflectors';
+	this.setTitle('Reflectors');
 };
 
 // extend View & List
-Tools.extend(panelReflectorsView, PanelView);
+Tools.extend(panelReflectorsView, PanelListView);
 Tools.extend(panelReflectorsView, DStarView);
 
 
@@ -26,7 +26,8 @@ Tools.extend(panelReflectorsView, DStarView);
  */
 panelReflectorsView.prototype.addReflector = function(reflector)
 {
-	this.content.innerHTML += 'REF ADD ['+reflector.id+']<br>';
+	var listElement = new PanelListElementDStarView(reflector);
+	this.append(listElement);
 };
 
 /**
@@ -36,5 +37,5 @@ panelReflectorsView.prototype.addReflector = function(reflector)
  */
 panelReflectorsView.prototype.removeReflector = function(reflector)
 {
-	this.content.innerHTML += 'REF REMOVE ['+reflector.id+']<br>';
+	this.unappendWithUUID(reflector.uuid);
 };

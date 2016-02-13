@@ -1,21 +1,21 @@
 /**
  * @class Pannel with nodes list
  * @memberOf RepNet.View.DStar.Panel
- * @extends RepNet.View.Panel.PanelView
+ * @extends RepNet.View.Panel.PanelListView
  * @extends RepNet.View.Dstar.DStarView
  * @constructor
  * @param {DOMElement} dom Dom where to display pannel
  */
 var panelNodesView = function panelNodesView(dom)
 {
-	PanelView.call(this,dom);
+	PanelListView.call(this,dom);
 	DStarView.call(this,dom);
 
-	this.title.innerHTML = 'Nodes';
+	this.setTitle('Nodes');
 };
 
 // extend View & List
-Tools.extend(panelNodesView, PanelView);
+Tools.extend(panelNodesView, PanelListView);
 Tools.extend(panelNodesView, DStarView);
 
 /**
@@ -23,9 +23,10 @@ Tools.extend(panelNodesView, DStarView);
  * @param {Node} node Node to add
  * @return {void}
  */
-panelNodesView.prototype.addNode = function(node)
+panelNodesView.prototype.linkNode = function(node)
 {
-	this.content.innerHTML += 'NODE ADD ['+node.id+']<br>';
+	var listElement = new PanelListElementDStarView(node.parent);
+	this.append(listElement);
 };
 
 /**
@@ -33,7 +34,9 @@ panelNodesView.prototype.addNode = function(node)
  * @param {Node} node Node to remove
  * @return {void}
  */
-panelNodesView.prototype.removeNode = function(node)
+panelNodesView.prototype.unlinkNode = function(node)
 {
-	this.content.innerHTML += 'NODE REMOVE ['+node.id+']<br>';
+	if (node.parent.linked == 0) {
+		this.unappendWithUUID(node.parent.uuid);
+	}
 };

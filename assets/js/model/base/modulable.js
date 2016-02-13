@@ -27,13 +27,21 @@ var Modulable = function Modulable(id, moduleClass)
 	 */
 	this.moduleFactory = new Factory(moduleClass);
 
+	/**
+	 * Total of module linked
+	 * @type {Number}
+	 */
+	this.linked = 0;
+
 
 	// module event trigger itself event
 	this.moduleFactory.on('create', function(module) {
 		module.on('link', function(child){
+			that.linked++;
 			that.trigger('link', module, child);
 		})
 		module.on('unlink', function(child){
+			that.linked--
 			that.trigger('unlink', module, child);
 		})
 		module.on('linkTo', function(parent){
