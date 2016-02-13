@@ -18,7 +18,9 @@ var Socket = function Socket(http)
 	});
 
 	reflectorFactory.on('create', function(reflector) {
-		that.socket.emit('reflector add', reflector.toJSON());
+		reflector.on('connected',function(){
+			that.socket.emit('reflector add', reflector.toJSON());
+		});
 	});
 
 	reflectorFactory.on('remove', function(reflector) {

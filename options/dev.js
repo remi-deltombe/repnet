@@ -1,11 +1,20 @@
 var reflectorFactory = require('./../src/model/reflector/factory.js');
 
 module.exports = function(path){
+
+	reflectorFactory.on('create',function(reflector){
+		setTimeout(function(){
+			reflector.trigger('connected')
+		},100);
+	})
+
 	setInterval(function(){
-		var i,data = require(path), existing=[], toDelete=[];
+		var i,n,data = require(path), existing=[], toDelete=[];
 		for (i in data) {
+
 			existing.push(data[i].reflector);
 			reflectorFactory.get(data[i].reflector).populate(data[i]);
+
 		}
 
 		reflectorFactory.each(function(index, reflector){

@@ -35,6 +35,12 @@ var Reflector = function Reflector(callsign)
 	 * @type {Object}
 	 */
 	this.socket = null;
+
+	/**
+	 * Is the socket connected
+	 * @type {Boolean}
+	 */
+	this.connected = false;
 };
 
 // Extend Modulable
@@ -174,6 +180,10 @@ Reflector.prototype.connect = function (ip, port)
 		try {
 			json = JSON.parse(data.toString());
 			that.populate(json);
+			if (!that.connected) {
+				that.trigger('connected');
+				that.connected = true;
+			}
 		} catch (error) {
 			console.log('BAD JSON : ' + data.toString());
 			return ;
