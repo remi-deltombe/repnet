@@ -152,7 +152,7 @@ ThreeElementView.prototype =
 	},
 
 	/**
-	 * Set the element as visible
+	 * Set the element as invisible
 	 * @return {void}
 	 */
 	hide : function()

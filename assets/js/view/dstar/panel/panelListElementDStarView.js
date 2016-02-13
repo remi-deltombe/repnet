@@ -3,12 +3,13 @@
  * @memberOf RepNet.View.DStar.Panel
  * @extends RepNet.View.Panel.List.PanelListElementView
  * @constructor
- * @param {DOMElement} dom Dom where to display pannel
+ * @param {Model} element Dstar model used to construct list element
  */
 var PanelListElementDStarView = function PanelListElementDStarView(element)
 {
-	PanelListElementView.call(this,element.id);
 	this.uuid = element.uuid;
+	this.element = element;
+	PanelListElementView.call(this,element.id);
 };
 
 // extend View & List
