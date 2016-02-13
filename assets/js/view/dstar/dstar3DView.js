@@ -54,7 +54,7 @@ var DStar3DView = function DStar3DView(dom)
 };
 
 // extend Emitter
-Tools.extend(DStar3DView, View);
+Tools.extend(DStar3DView, DStarView);
 
 /**
  * Build a reflector if not exist and return it
