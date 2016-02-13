@@ -21,7 +21,8 @@ var DStar3DView = function DStar3DView(dom)
 	this.renderer.update();
 
 	// init base config
-	Config.instance().set('3D.colors.reflector', 0xFFA500);
+	Config.instance().set('3D.colors.reflector.on', 0xFFA500);
+	Config.instance().set('3D.colors.reflector.off', 0x333333);
 	Config.instance().set('3D.colors.node', 0x086CA2);
 	Config.instance().set('3D.colors.station', 0x999999);
 	Config.instance().set('3D.colors.talk', 0xFF3333);
@@ -219,11 +220,13 @@ DStar3DView.prototype.unlinkStation = function(station, nodeModule)
 DStar3DView.prototype.talk = function(station)
 /** @lends  DStar3DView */
 {
-	var node, station;
-	node = this.getNode(station.linkParent.uuid);
-	station = this.getStation(station.uuid);
-	node.setColor(Config.instance().get('3D.colors.talk'));
-	station.setColor(Config.instance().get('3D.colors.talk'));
+	var _node, _station, _reflector;
+	_station = this.getStation(station.uuid);
+	_node = this.getNode(station.linkParent.uuid);
+	_reflector = this.getReflector(station.linkParent.linkParent.uuid);
+	_reflector.setColor(Config.instance().get('3D.colors.talk'));
+	_node.setColor(Config.instance().get('3D.colors.talk'));
+	_station.setColor(Config.instance().get('3D.colors.talk'));
 };
 
 /**
@@ -233,10 +236,12 @@ DStar3DView.prototype.talk = function(station)
 DStar3DView.prototype.untalk = function(station)
 /** @lends  DStar3DView */
 {
-	var node, station;
-	node = this.getNode(station.linkParent.uuid);
-	station = this.getStation(station.uuid);
-	node.setColor(Config.instance().get('3D.colors.node'));
-	station.setColor(Config.instance().get('3D.colors.station'));
+	var _node, _station, _reflector;
+	_station = this.getStation(station.uuid);
+	_node = this.getNode(station.linkParent.uuid);
+	_reflector = this.getReflector(station.linkParent.linkParent.uuid);
+	_reflector.setColor(Config.instance().get('3D.colors.reflector.on'));
+	_node.setColor(Config.instance().get('3D.colors.node'));
+	_station.setColor(Config.instance().get('3D.colors.station'));
 };
 

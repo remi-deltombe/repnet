@@ -145,7 +145,7 @@ NetworkNodeThreeView.prototype.setDistance = function(distance)
 };
 
 /**
- * Set distance of the element's sphere from the middle
+ * Set the rotation's speed of the element's sphere from the middle
  * @param {Number} speed New speed
  */
 NetworkNodeThreeView.prototype.setSpeed = function(speed)
