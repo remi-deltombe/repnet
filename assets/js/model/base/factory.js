@@ -58,9 +58,9 @@ Factory.prototype.remove = function(id)
 /** @lends  Factory */
 {
 	var instance = this.get(id);
-	trigger('remove', instance);
+	this.trigger('remove', instance);
 	delete this.get(id);
-	Map.prototype.remove.call(id);
+	Map.prototype.remove.call(this, id);
 }
 
 /**
