@@ -222,7 +222,7 @@ DStarCtrl.prototype =
 	onFocusReflector : function(reflectorModule)
 	{
 		this.views.each(function(index, view){
-			view.focusReflector(station);
+			view.focusReflector(reflectorModule);
 		});
 	},
 
@@ -233,7 +233,7 @@ DStarCtrl.prototype =
 	onFocusNode : function(nodeModule)
 	{
 		this.views.each(function(index, view){
-			view.focusNode(station);
+			view.focusNode(nodeModule);
 		});
 	},
 
