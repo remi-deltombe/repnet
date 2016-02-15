@@ -44,13 +44,13 @@ var DStar3DView = function DStar3DView(dom)
 		dy = mouse.positionOnDown.y-mouse.position.y;
 		rotation.x = this.initialRotation.x + (dy)/500,
 		rotation.y = this.initialRotation.y + (dx)/500
-	}.bind(this));
+	}.bind(this), this.dom);
 
 	// scroll zoom into 3d view
 	mouse.on('scroll', function(distance){
 		var position = this.renderer.getPosition();
 		position.z += distance > 0 ? 1 : -1 ;
-	}.bind(this));
+	}.bind(this), this.dom);
 };
 
 // extend Emitter
