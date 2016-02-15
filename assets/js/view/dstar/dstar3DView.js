@@ -54,6 +54,7 @@ var DStar3DView = function DStar3DView(dom)
 };
 
 // extend Emitter
+Tools.extend(DStar3DView, Emitter);
 Tools.extend(DStar3DView, DStarView);
 
 /**
