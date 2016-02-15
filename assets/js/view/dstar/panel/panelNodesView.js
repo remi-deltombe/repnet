@@ -26,6 +26,7 @@ Tools.extend(panelNodesView, DStarView);
 panelNodesView.prototype.linkNode = function(node)
 {
 	var listElement = new PanelListElementDStarModulableView(node.parent);
+	listElement.on('focus module', this.trigger.bind(this, 'focus node'));
 	this.append(listElement);
 };
 

@@ -29,7 +29,9 @@ PanelListElementDStarModulableView.prototype.buildContent = function()
 	this.dom.appendChild(this.modulesDOM);
 
 	this.element.modules().each(function(moduleName, module){
-		var dom,linked = module.linkChilds.length || module.linkParent;
+		var dom,
+			mouse = new Mouse(), 
+			linked = module.linkChilds.length || module.linkParent;
 
 		dom = document.createElement('div');
 		dom.className = 'module'+(linked?' linked' : '');
@@ -37,6 +39,10 @@ PanelListElementDStarModulableView.prototype.buildContent = function()
 		this.modulesDOM.appendChild(dom);
 		this.modules.set(moduleName, dom);
 
+		// register mouse event
+		mouse.on('click', this.trigger.bind(this, 'focus module', module), dom);
+
+		// register module event
 		module.on('link', this.updateModuleState.bind(this, module));
 		module.on('linkTo', this.updateModuleState.bind(this, module));
 		module.on('unlink', this.updateModuleState.bind(this, module));

@@ -72,6 +72,12 @@ var DStarCtrl = function DStarCtrl()
 		station.on('untalk', that.onUntalk.bind(that, station));
 	});
 
+	// register views events
+	this.views.each(function(index, view){
+		view.on('focus reflector', this.onFocusReflector.bind(this));
+		view.on('focus node', this.onFocusNode.bind(this));
+		view.on('focus station', this.onFocusStation.bind(this));
+	}.bind(this));
 }
 
 DStarCtrl.prototype =
@@ -206,6 +212,39 @@ DStarCtrl.prototype =
 	{
 		this.views.each(function(index, view){
 			view.untalk(station);
+		});
+	},
+
+	/**
+	 * Set the focus on a reflector
+	 * @return {void}
+	 */
+	onFocusReflector : function(reflectorModule)
+	{
+		this.views.each(function(index, view){
+			view.focusReflector(station);
+		});
+	},
+
+	/**
+	 * Set the focus on a node
+	 * @return {void}
+	 */
+	onFocusNode : function(nodeModule)
+	{
+		this.views.each(function(index, view){
+			view.focusNode(station);
+		});
+	},
+
+	/**
+	 * Set the focus on a station
+	 * @return {void}
+	 */
+	onFocusStation : function(station)
+	{
+		this.views.each(function(index, view){
+			view.focusStation(station);
 		});
 	}
 }

@@ -28,6 +28,7 @@ Tools.extend(panelStationsView, DStarView);
 panelStationsView.prototype.linkStation = function(station)
 {
 	var listElement = new PanelListElementDStarView(station);
+	listElement.on('focus', this.trigger.bind(this, 'focus station'));
 	this.append(listElement);
 };
 

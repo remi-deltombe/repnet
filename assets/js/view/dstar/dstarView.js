@@ -125,5 +125,29 @@ DStarView.prototype =
 	 */
 	untalk : function(station)
 	{
+	},
+
+	/**
+	 * Set the focus on a reflector
+	 * @return {void}
+	 */
+	focusReflector : function(reflectorModule)
+	{
+	},
+
+	/**
+	 * Set the focus on a node
+	 * @return {void}
+	 */
+	focusNode : function(nodeModule)
+	{
+	},
+
+	/**
+	 * Set the focus on a station
+	 * @return {void}
+	 */
+	focusStation : function(station)
+	{
 	}
 };

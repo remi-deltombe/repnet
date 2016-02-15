@@ -27,6 +27,7 @@ Tools.extend(panelReflectorsView, DStarView);
 panelReflectorsView.prototype.addReflector = function(reflector)
 {
 	var listElement = new PanelListElementDStarModulableView(reflector);
+	listElement.on('focus module', this.trigger.bind(this, 'focus reflector'));
 	this.append(listElement);
 };
 
