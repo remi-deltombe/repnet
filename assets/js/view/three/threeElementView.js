@@ -224,5 +224,24 @@ ThreeElementView.prototype =
 	getRotation : function()
 	{
 		return this.threeElement.rotation;
+	},
+
+	/**
+	 * Set position of the childs container
+	 * @param {Number|false} x X axis, let the current value if false 
+	 * @param {Number|false} y Y axis, let the current value if false 
+	 * @param {Number|false} z Z axis, let the current value if false 
+	 */
+	setChildsPosition : function(x, y, z)
+	{
+		if (typeof x != "undefined" && x !== false) {
+			this.threeChilds.position.x = -x;
+		}
+		if (typeof y != "undefined" && y !== false) {
+			this.threeChilds.position.y = -y;
+		}
+		if (typeof z != "undefined" && z !== false) {
+			this.threeChilds.position.z = -z;
+		}
 	}
 };
