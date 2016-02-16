@@ -246,3 +246,15 @@ DStar3DView.prototype.untalk = function(station)
 	_station.setColor(Config.instance().get('3D.colors.station'));
 };
 
+/**
+ * Set a station as untalker
+ * @return {void}
+ */
+DStar3DView.prototype.focusReflector = function(reflectorModule)
+/** @lends  DStar3DView */
+{
+	var position = this.getReflector(reflectorModule.uuid).getPosition();
+	this.renderer.setChildsPosition(position.x,position.y,position.z);
+	console.log(position);
+};
+
