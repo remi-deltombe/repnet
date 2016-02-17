@@ -20,7 +20,7 @@ var DStarCtrl = function DStarCtrl()
 	dom = document.getElementById('menu-left-top');
 	this.menu = new MenuView(dom);
 
-	this.menu.add(new MenuItemView(dom, 'search', 'Search'));
+	//this.menu.add(new MenuItemView(dom, 'search', 'Search'));
 
 	// panels
 	// reflectors
