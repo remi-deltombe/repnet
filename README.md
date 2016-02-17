@@ -10,6 +10,7 @@ The following service should be install on the server :
 
 ### installation
 In terminal :
+
 1. Clone the repository and move in it
 ```bash
 cd "location/where/the/app/should/be/install"
