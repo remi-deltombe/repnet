@@ -205,6 +205,17 @@ a {
 		margin-bottom: 20px;
 	}
 
+	.panel-content {
+		border-top: 2px solid rgba(0,0,0,.1);
+	    position: absolute;
+	    top: 58px;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    overflow-y: scroll;
+	    padding: 0 18px;
+	}
+
 /* 3D View */
 #galaxy {
 	position: absolute;
