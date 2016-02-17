@@ -255,5 +255,6 @@ DStar3DView.prototype.focusReflector = function(reflectorModule)
 {
 	var position = this.getReflector(reflectorModule.uuid).getPosition();
 	this.renderer.setChildsPosition(position.x,position.y,position.z);
+	console.log(position);
 };
 
