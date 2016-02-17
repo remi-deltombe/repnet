@@ -44,6 +44,18 @@ a {
 	height: 26px;
 }
 
+/* Github */
+.github {
+	position: absolute;
+	z-index: 1000;
+	top: 18px;
+	right: 18px;
+	text-align: right;
+}
+.github .xlxd {
+	margin-bottom: 9px;
+}
+
 /* Menu left */
 #menu-left {
 	position: absolute;
