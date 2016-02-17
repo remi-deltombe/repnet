@@ -11,13 +11,13 @@ The following service should be install on the server :
 ### installation
 In terminal :
 
-1. Clone the repository and move in it
+Clone the repository and move in it
 ```bash
 cd "location/where/the/app/should/be/install"
 git clone https://github.com/RemiDeltombe/repnet.git
 cd repnet
 ```
-2. Install repnet dependencies
+Install repnet dependencies
 ```bash
 npm install
 ```
